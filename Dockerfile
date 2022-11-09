@@ -33,4 +33,4 @@ RUN composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin t
 WORKDIR /var/www
 
 # Install depedencies, set .env file, migrate and start fpm server
-CMD cp .env.example .env && COMPOSER=composer-dev.json composer install && php artisan key:generate && php artisan storage:link && php artisan config:clear && php artisan route:clear && php artisan view clear && php-fpm
+CMD cp .env.example .env && COMPOSER=composer-dev.json composer install && php artisan key:generate && php artisan storage:link && php artisan config:clear && php artisan route:clear && php artisan view:clear && php-fpm
