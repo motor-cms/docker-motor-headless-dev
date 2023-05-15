@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
+    libmagickwand-dev \
     zip \
     unzip \
     cron
@@ -26,6 +27,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install redis extension for php
 RUN pecl install redis && docker-php-ext-enable redis
+
+# Install imagick extension for php
+RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Set working directory
 WORKDIR /var/www
