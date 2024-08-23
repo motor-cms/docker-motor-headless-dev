@@ -48,7 +48,7 @@ RUN pecl install redis && docker-php-ext-enable redis
 # Install imagick extension for php
 RUN cd /tmp
 RUN git clone https://github.com/Imagick/imagick.git
-RUN pecl install /tmp/imagick/package.xml  \
+RUN pecl install /tmp/imagick/package.xml
 RUN docker-php-ext-enable imagick
 
 # Set working directory
