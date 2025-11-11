@@ -33,12 +33,24 @@ RUN apt-get update && apt-get install -y \
     pdftk-java \
     gnupg2 \
     apt-transport-https \
-    ca-certificates
+    ca-certificates \
+    build-essential \
+    autoconf
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install xdebug \
+# Install xdebug from source for PHP 8.4 compatibility
+RUN cd /tmp \
+    && git clone https://github.com/xdebug/xdebug.git \
+    && cd xdebug \
+    && git checkout 3.4.7 \
+    && phpize \
+    && ./configure --enable-xdebug \
+    && make \
+    && make install \
+    && cd / \
+    && rm -rf /tmp/xdebug \
     && docker-php-ext-enable xdebug
 
 # Install PHP extensions
